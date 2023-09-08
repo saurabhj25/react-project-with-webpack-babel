@@ -8,10 +8,24 @@
     "build": "npm run build:clean && webpack --config webpack.config.js",
     "build:prod": "npm run build:clean && NODE_ENV=production webpack --config webpack.config.prod.js",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:staged": "lint-staged",
+    "format:fix": "prettier . --write",
     "build:clean": "rm -rf build/*"
   },
   "author": "",
   "license": "ISC",
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  },
+  "pre-commit": [
+    "lint:staged"
+  ],
   "dependencies": {
     "prop-types": "15.8.1",
     "react": "18.2.0",
@@ -33,7 +47,9 @@
     "eslint-plugin-react": "7.33.2",
     "file-loader": "6.2.0",
     "html-webpack-plugin": "5.5.3",
+    "lint-staged": "14.0.1",
     "mini-css-extract-plugin": "2.7.6",
+    "pre-commit": "1.2.2",
     "style-loader": "3.3.3",
     "terser-webpack-plugin": "5.3.9",
     "webpack": "5.88.2",
